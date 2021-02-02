@@ -1,0 +1,54 @@
+<meta charset="utf-8">
+<h1>JavaScript: manipulação de classes</h1>
+<style>
+    button {
+        border: 1px solid #ddd;
+        background-color: #ddd;
+    }
+
+    button.vermelho {
+        background: #fff0f0;
+        border-color: #db2323;
+    }
+
+    button.verde {
+        border-color: green;
+        background-color: yellowgreen;
+        color: green;
+    }
+</style>
+<button id="btn1">Botão 1</button>
+<button id="btn2" class="vermelho">Botão 2</button>
+<button id="btn3">Botão 3</button>
+<button id="btn4" class="vermelho">Botão 4</button>
+<button id="btn5" class="vermelho">Botão 5</button>
+
+<script>
+
+    // guardar as referências dos botões 
+    let botao1 = document.querySelector('#btn1');
+    let botao2 = document.querySelector('#btn2');
+    let botao3 = document.querySelector('#btn3');
+    let botao4 = document.querySelector('#btn4');
+    let botao5 = document.querySelector('#btn5');
+
+    botao1.onclick = () => botao1.classList.add('vermelho');
+    botao2.onclick = () => botao2.classList.remove('vermelho');
+    botao3.onclick = () => botao3.classList.toggle('vermelho');
+    botao4.onclick = () => {
+        let temClasseVermelho = botao4.classList.contains('vermelho');
+
+        if (temClasseVermelho) {
+            alert('O botão tem a classe VERMELHO!!!');
+        }
+        else {
+            alert('O botão NÃO tem a classe VERMELHO!!!');
+        }
+
+        botao4.classList.toggle('vermelho');
+    }
+
+    botao5.onclick = () => botao5.classList.replace('vermelho', 'verde');
+    
+
+</script>

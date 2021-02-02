@@ -1,0 +1,64 @@
+<meta charset="utf-8" />
+<h1>JavaScript: querySelector e querySelectorAll</h1>
+<style>
+    p {
+        background-color: #f2f2f2;
+        border: 1px solid #ddd;
+        padding: 15px;
+    }
+
+    .vermelho {
+        background-color: #fff0f0;
+        border-color: red;
+        color: red;
+    }
+</style>
+
+<p>Parágrafo 1</p>
+<p class="vermelho">Parágrafo 2</p>
+<p>Parágrafo 3</p>
+<p>Parágrafo 4</p>
+<p class="vermelho">Parágrafo 5</p>
+<p class="vermelho">Parágrafo 6</p>
+<span class="vermelho">Meu span vermelho</span>
+<p>Parágrafo 7</p>
+<p>Parágrafo 8</p>
+<p>Parágrafo 9</p>
+<p id="p10">Parágrafo 10</p>
+
+<script>
+
+    const p10 = document.querySelector('#p10'); // Element
+    console.log(p10);
+    // p10.textContent = "Texto alterado pelo <strong>JavaScript!</strong>"; // Conteúdo textual de um elemento
+    p10.innerHTML = "Texto alterado de novo pelo <strong>JavaScript!</strong>"; // Conteúdo textual de um elemento com execução de tags HTML
+    p10.style.fontStyle = 'italic';
+
+    const vermelhos = document.querySelectorAll('.vermelho'); // NodeList<Element>
+    console.log(vermelhos);
+
+    for (let i = 0; i < vermelhos.length; i++)
+    {
+        vermelhos[i].textContent = "Vermelhos alterados pelo JS!!!";
+    }
+
+    // for... of 
+    for (let vermelho of vermelhos)
+    {
+        vermelho.textContent = "Vermelhos alterados pelo JS via for..of!!!";
+    }
+
+    // forEach = Utilizado em Arrays e seus tipos descendentes como o NodeList
+    vermelhos.forEach(function(vermelho, indice) {
+        vermelho.textContent = "Vermelho #" + indice + " foi alterado pelo JS via forEach!!!";
+    });
+
+    // Arrow Functions = ES6
+    vermelhos.forEach(vermelho => vermelho.textContent = "Vermelho foi alterado pelo JS com ARROW FUNCTIONS!!!");
+
+    const soma = (v1, v2) => v1 + v2;
+    console.log('Resultado: ', soma(5, 6));
+
+</script>
+
+
