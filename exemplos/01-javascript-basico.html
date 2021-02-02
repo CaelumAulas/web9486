@@ -1,0 +1,113 @@
+<meta charset="utf-8">
+<h1>JavaScript Básico</h1>
+
+<script>
+
+    /* 
+        'use strict'
+        1) Proibe a criação de variáveis sem um comando declarativo explícito;
+        2) Proibe parâmetros duplicados em funções
+        3) Proibe o uso do comando "with"
+        4) Modifica o comportamento do comando "this"
+    */
+    'use strict';
+
+    var a = 888;
+    if (true) {
+        var b = 999;
+    }
+
+    console.log('O valor da variável a é:', a); // Ok
+    console.log('O valor da variável b é:', b); // Ok
+
+    function teste1() {
+        var idade = 17;
+        console.log('Variável idade dentro da função: ', idade); // Ok... exibe 17
+    }
+
+    teste1(); // executa a função
+    // console.log('Variável idade fora da função: ', idade); // ReferenceError
+
+    // ES6 = let para declaração de variáveis
+    let c = 777;
+    if (true) {
+        let d = 666;
+        console.log('Valor de d é:', d); // OK
+    }
+
+    // console.log('Valor de d é:', d); // ReferenceError
+
+    // ES6 = constantes (const)
+    const x = 10;
+    // x = 2; // TypeError
+
+    const listaNomes = ['Adriana', 'Fabiana', 'Rodrigo'];
+    console.log(listaNomes);
+
+    listaNomes.push('Gabriel');
+    listaNomes.shift(); // remove o primeiro elemento do array
+    listaNomes[1] = 'Henrique'; // altera o valor da posição 1 (Rodrigo) por "Henrique"
+
+    console.log(listaNomes);
+
+    // listaNomes = []; // TypeError: reatribuição de valor
+
+    // Objetos no JavaScript 
+    const pessoa = {
+        nome: "Pedro", // propriedades
+        sobrenome: "Oliveira",
+        idade: 35,
+
+        dizerOla() {
+            console.log('Olá meu nome é: ', this.nome);
+        }
+    }
+
+    console.log(pessoa);
+    console.log('O nome da pessoa é:', pessoa.nome);
+    pessoa.dizerOla();
+
+    pessoa.nome = "Bruno"; // Ok
+    pessoa.sexo = "M"; // Ok
+    pessoa.cidade = "Barueri"; // OK
+    delete pessoa.sobrenome;
+
+    pessoa.dizerTchau = function() {
+        console.log('Estou dizendo fucking tchau!!!');
+    }
+
+    pessoa.dizerTchau();
+    
+    console.log(pessoa);
+
+    // pessoa = {}; // TypeError: reatribuição de valor
+
+    // Funções (Function Expression e Function Declaration)
+    // Hoisting = É a capacidade do interpretador da engine do navegador de reorganizar a estrutura do código antes de executá-lo
+
+    // function declaration
+    somar(5, 6); // OK
+    function somar(valor1, valor2) {
+        console.log('Resultado: ', valor1 + valor2);
+    }
+
+    // function expression (NÃO TEM HOISTING)
+    const subtrair = function(valor1, valor2) {
+        console.log('Resultado da substração:', valor1 - valor2);
+    }
+    subtrair(5, 3); // Ok
+
+    // Escopo Vazio
+    {
+        function testando(nome) 
+        {
+            console.log('Seu nome é: ', nome);
+        }
+
+        // Coloca o 
+        window.testandoFuncao = testando;
+    }
+
+    testandoFuncao('Jhonatan'); // window.testandoFuncao()
+
+</script>
