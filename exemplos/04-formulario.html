@@ -1,0 +1,127 @@
+<meta charset="utf-8" />
+<h1>JavaScript: Formulário</h1>
+<style>
+    .msg {
+        padding: 15px 25px;
+        border-radius: 5px;
+        border: 1px solid #ddd;
+        background-color: #f2f2f2;
+    }
+
+    .msg-erro,
+    .destacar {
+        border-color: #db2323;
+        color: #db2323;
+        background-color: #fff0f0;
+    }
+
+    .msg-sucesso {
+        border-color: #30cf6c;
+        color: #30cf6c;
+        background-color: #e3ffee;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    form {
+        width: 400px;
+        margin-top: 20px;
+    }
+
+    body {
+        padding: 60px;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    input {
+        width: 100%;
+        border: 1px solid #ccc;
+        padding: 12px;
+        box-sizing: border-box;
+    }
+
+    button {
+        border-radius: 5px;
+        border: none;
+        background: green;
+        color: #fff;
+        padding: 15px 35px;
+    }
+
+    .escondida {
+        display: none;
+    }
+</style>
+
+<form action="">
+    <label for="">
+        * Nome: <br>
+        <input type="text" data-mensagem="Nome é obrigatório!" class="obrigatorio" />
+    </label>
+
+    <label for="">
+        * E-mail: <br>
+        <!-- "data-" é chamado de Dataset API do HTML5 -->
+        <input type="text" data-mensagem="E-mail é obrigatório!" class="obrigatorio" />
+    </label>
+
+    <label for="">
+        Telefone: <br>
+        <input type="text" />
+    </label>
+
+    <button>
+        Enviar
+    </button>
+</form>
+
+<script>
+
+    let formulario = document.querySelector('form');
+    const divMsg = document.createElement('div');
+    divMsg.classList.add('msg', 'msg-erro');
+
+    formulario.addEventListener('submit', (event) => {
+        // bloqueia o comportamento padrão do evento, no caso aqui é recarregar a página
+        event.preventDefault(); 
+        let camposObrigatorios = formulario.querySelectorAll('.obrigatorio');
+        let mensagensErro = [];
+
+        for (let campo of camposObrigatorios)
+        {
+            if (!campo.value.trim()) {
+                mensagensErro.push(campo.dataset.mensagem);
+                campo.classList.add('destacar');
+            }
+            else {
+                campo.classList.remove('destacar');
+            }
+        }
+
+        if (mensagensErro.length > 0)
+        {
+            // tem mensagens de erro pra exibir
+            // divMsg.innerHTML = '<strong>Atenção!</strong><br>' + mensagensErro.join('<br>');
+            divMsg.innerHTML = `
+                <strong>Atenção!</strong><br>
+                ${ mensagensErro.join('<br>') }
+            `;
+            divMsg.classList.replace('msg-sucesso', 'msg-erro');
+        }
+        else 
+        {
+            // NÃO TEM mensagens de erro pra exibir
+            divMsg.textContent = "Cadastro realizado com sucesso!";
+            divMsg.classList.replace('msg-erro', 'msg-sucesso');
+        }
+
+        // formulario.prepend(divMsg); // adiciona a divMsg como primeiro-filho do formulário
+        // formulario.append(divMsg); // adiciona a divMsg como último-filho do formulário
+        formulario.insertAdjacentElement('beforebegin', divMsg);
+    });
+
+</script>
+

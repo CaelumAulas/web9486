@@ -1,0 +1,50 @@
+<meta charset="utf-8" />
+<h1>Animação Simples</h1>
+
+<div class="box"></div>
+
+<br><br>
+
+<button id="play">
+    Play
+</button>
+
+<button id="pause">
+    Pause
+</button>
+
+<button id="cancelar">
+    Cancelar
+</button>
+
+<style>
+    .box {
+        width: 100px;
+        height: 100px;
+        background-color: red;
+    }
+</style>
+
+<script>
+
+    const box = document.querySelector('.box');
+    const keyframes = [
+        { transform: 'translateX(0)' },
+        { transform: 'translateX(800px)', backgroundColor: 'green', borderRadius: '100%' }
+    ];
+
+    const animacao = box.animate(keyframes, {
+        duration: 3000,
+        iterations: Infinity,
+        direction: 'alternate'
+    });
+
+    const btnPlay = document.querySelector('#play');
+    const btnPause = document.querySelector('#pause');
+    const btnCancel = document.querySelector('#cancelar');
+
+    btnPlay.onclick = () => animacao.play();
+    btnPause.onclick = () => animacao.pause();
+    btnCancel.onclick = () => animacao.cancel();
+
+</script>
