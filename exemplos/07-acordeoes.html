@@ -69,6 +69,11 @@
 <script>
 
     const acordeoes = document.querySelector('.acordeoes');
+    const opcoesAnimacao = {
+        duration: 600,
+        fill: 'forwards'
+    };
+
     acordeoes.addEventListener('click', event => {
         if (event.target.tagName == 'H4') {
             const divConteudo = event.target.nextElementSibling;
@@ -78,10 +83,17 @@
                 animationHeight = 0;
             }
 
-            divConteudo.animate({ height: animationHeight + 'px' }, {
-                duration: 600,
-                fill: 'forwards'
-            });
+            divConteudo.animate({ height: animationHeight + 'px' }, opcoesAnimacao);
+
+            // Fecha os demais acordeões que estiverem abertos
+            const acordeaoAtual = divConteudo.parentElement;
+            for (let acordeao of acordeoes.children)
+            {
+                if (acordeao != acordeaoAtual) {
+                    acordeao.lastElementChild.animate({ height: '0px' }, opcoesAnimacao);
+                }
+            }
+
         }
     });
 
