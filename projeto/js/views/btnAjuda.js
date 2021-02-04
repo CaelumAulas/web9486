@@ -1,3 +1,5 @@
+import { adicionarCartao } from "./mural.js";
+
 const btn = document.querySelector('#btnAjuda');
 btn.addEventListener('click', () => {
     let mensagens = [
@@ -7,7 +9,6 @@ btn.addEventListener('click', () => {
     ];
 
     for (let mensagem of mensagens) {
-        alert(mensagem);
+        adicionarCartao(mensagem);
     }
 });
-

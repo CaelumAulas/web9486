@@ -1,4 +1,14 @@
 const mural = document.querySelector('.mural');
+const template = document.querySelector('#template-cartao');
+let numeroCartao = 0;
+
+export function adicionarCartao(conteudo)
+{
+    numeroCartao++;
+    const cartao = template.content.firstElementChild.cloneNode(true);
+    cartao.innerHTML = cartao.innerHTML.replaceAll('{{NUMERO_CARTAO}}', numeroCartao).replace('{{CONTEUDO_CARTAO}}', conteudo);
+    mural.append(cartao);
+}
 
 export function toggleLayout() {
     mural.classList.toggle('mural--linha');
