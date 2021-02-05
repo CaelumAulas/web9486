@@ -57,10 +57,52 @@
         </table>
     </div>
 
-    <script>
+    <script src="js/app.js" type="module"></script>
+
+    <!-- <script>
 
         // Insira sua lógica aqui
+        const formulario = document.querySelector('#formCadastro');
+        const tabela = document.querySelector('#tabelaContatos');
 
-    </script>
+        formulario.addEventListener('submit', function() {
+            event.preventDefault();
+            const campoNome = formulario.querySelector('#inputNome');
+            const campoTel = formulario.querySelector('#inputTelefone');
+
+            if (campoNome.value.trim() === '') {
+                alert(campoNome.dataset.msg);
+            }
+
+            else if (campoTel.value.trim() === '') {
+                alert(campoTel.dataset.msg);
+            }
+
+            else {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${campoNome.value.trim()}</td>
+                    <td>${campoTel.value.trim()}</td>
+                    <td>
+                        <button class="btn btn-danger btn-sm">
+                            Excluir
+                        </button>
+                    </td>
+                `;
+
+                tabela.append(tr);
+                formulario.reset();
+            }
+            
+        });
+
+        tabela.addEventListener('click', function(event) {
+            if (event.target.classList.contains('btn-danger')) {
+                const botaoExcluir = event.target;
+                botaoExcluir.closest('tr').remove();
+            }
+        });
+
+    </script> -->
 </body>
 </html>

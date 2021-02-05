@@ -1,0 +1,1 @@
+// lógica de validação do formulário e coleta de dados
