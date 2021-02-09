@@ -1,0 +1,40 @@
+<meta charset="utf-8">
+<h1>AJAX com API Fetch e Async/Await</h1>
+<button id="btnCarregar">
+    Carregar
+</button>
+<button onclick="alert('Teste')">Testando</button>
+
+<div class="conteudo">
+    <!-- Conteúdo carregado pelo AJAX -->
+</div>
+
+<script>
+    // 02-dom.html
+
+    const btnCarregar = document.querySelector('#btnCarregar');
+    const divConteudo = document.querySelector('.conteudo');
+
+    btnCarregar.addEventListener( 'click', async function() {
+        try 
+        {
+            btnCarregar.disabled = true;
+            btnCarregar.textContent = 'Carregando...';
+
+            const resposta = await fetch('https://jhonatanjacinto.dev/teste.php');
+            let stringHtmlCarregado = await resposta.text();
+            divConteudo.innerHTML = stringHtmlCarregado;
+        }
+        catch(erro) 
+        {
+            console.error(erro);
+            divConteudo.textContent = 'Erro ao carregar dados do back-end!';
+        }
+        finally 
+        {
+            btnCarregar.disabled = false;
+            btnCarregar.textContent = 'Carregar';
+        }
+    } );
+
+</script>

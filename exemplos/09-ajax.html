@@ -1,0 +1,32 @@
+<meta charset="utf-8">
+<h1>AJAX clássico</h1>
+<button id="btnCarregar">
+    Carregar
+</button>
+<button onclick="alert('Teste')">Testando</button>
+
+<div class="conteudo">
+    <!-- Conteúdo carregado pelo AJAX -->
+</div>
+
+<script>
+    // 02-dom.html
+
+    const btnCarregar = document.querySelector('#btnCarregar');
+    const divConteudo = document.querySelector('.conteudo');
+
+    btnCarregar.addEventListener( 'click', function() {
+        const xhr = new XMLHttpRequest();
+        xhr.open( 'GET', '02-dom.html', true ); // true = assíncrono | false = síncrono
+        xhr.send();
+
+        xhr.addEventListener('load', function() {
+            divConteudo.innerHTML = xhr.response;
+        });
+
+        xhr.addEventListener('error', function() {
+            divConteudo.textContent = 'Erro ao carregar informações do back-end';
+        });
+    } );
+
+</script>

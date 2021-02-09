@@ -1,0 +1,39 @@
+<meta charset="utf-8">
+<h1>AJAX com API Fetch</h1>
+<button id="btnCarregar">
+    Carregar
+</button>
+<button onclick="alert('Teste')">Testando</button>
+
+<div class="conteudo">
+    <!-- Conteúdo carregado pelo AJAX -->
+</div>
+
+<script>
+    // 02-dom.html
+
+    const btnCarregar = document.querySelector('#btnCarregar');
+    const divConteudo = document.querySelector('.conteudo');
+
+    btnCarregar.addEventListener( 'click', function() {
+        btnCarregar.disabled = true;
+        btnCarregar.textContent = 'Carregando...';
+
+        fetch('https://jhonatanjacinto.dev/teste.php').then(function(resposta) {
+            return resposta.text();
+        })
+        .then(function(stringHtmlCarregada) {
+            divConteudo.innerHTML = stringHtmlCarregada;
+        })
+        .catch(function(erro) {
+            console.error(erro);
+            divConteudo.textContent = 'Erro ao carregar informações do back-end!';
+        })
+        .finally(function() {
+            btnCarregar.disabled = false;
+            btnCarregar.textContent = 'Carregar';
+        });
+
+    } );
+
+</script>
