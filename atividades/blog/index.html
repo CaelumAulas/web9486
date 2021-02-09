@@ -14,5 +14,28 @@
 <script>
 
     // Insira sua lógica aqui
+    const btn = document.querySelector('.btn');
+    const divPosts = document.querySelector('.posts-blog');
+
+    btn.addEventListener( 'click', async function() {
+        divPosts.textContent = '';
+        const resposta = await fetch('https://jsonplaceholder.typicode.com/posts');
+        const listaPosts = await resposta.json();
+
+        for (let post of listaPosts)
+        {
+            const div = document.createElement('div');
+            div.classList.add('card', 'mb-3');
+            div.innerHTML = `
+                <div class="card-header">
+                    ${post.title}
+                </div>
+                <div class="card-body">
+                    ${post.body}
+                </div>
+            `;
+            divPosts.append(div);
+        }
+    } );
 
 </script>
