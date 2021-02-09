@@ -21,5 +21,42 @@
 <script>
 
     // insira a lógica aqui
+    const selectUsuarios = document.querySelector('#listaUsuarios');
+    const cardBody = document.querySelector('.card-body');
+
+    // evento de carregamento da página
+    window.addEventListener('load', async function() {
+        const resposta = await fetch("https://jsonplaceholder.typicode.com/users");
+        const listaDeUsuarios = await resposta.json();
+        // console.log(listaDeUsuarios);
+
+        for (let usuario of listaDeUsuarios)
+        {
+            const option = document.createElement('option');
+            option.value = usuario.id;
+            option.textContent = usuario.name;
+            selectUsuarios.append(option);
+        }
+    });
+
+    selectUsuarios.addEventListener('change', async function() {
+        if (!selectUsuarios.value) {
+            cardBody.textContent = 'Selecione um usuário para exibir seus dados aqui :)';
+        }
+        else {
+            let id = selectUsuarios.value;
+            const resposta = await fetch(`https://jsonplaceholder.typicode.com/users/${id}`);
+            const dadosUsuario = await resposta.json();
+            // console.log(dadosUsuario);
+
+            cardBody.innerHTML = `
+                NOME: ${dadosUsuario.name}<br>
+                USERNAME: ${dadosUsuario.username}<br>
+                E-MAIL: ${dadosUsuario.email}<br>
+                CIDADE: ${dadosUsuario.address.city}<br>
+                SITE: ${dadosUsuario.website}<br>
+            `;
+        }
+    });
 
 </script>
