@@ -1,14 +1,35 @@
 import { getCartoesSalvos } from "../server/sync.js";
+import { IDBSubscribeOnLoadCartoes } from "../storage/db.js";
+import { notificar } from "./notificacao.js";
 
 const mural = document.querySelector('.mural');
 const template = document.querySelector('#template-cartao');
 let numeroCartao = 0;
 
-// carrega os cartões salvos e exibe no mural
-getCartoesSalvos().then(listaDeCartoesServidor => {
-    listaDeCartoesServidor.forEach(cartao => {
+IDBSubscribeOnLoadCartoes(async function(cartoesLocais) {
+    let listaCartoes = [];
+
+    try 
+    {
+        listaCartoes = await getCartoesSalvos();
+        if (cartoesLocais.length > 0 && confirm('Você ainda possui cartões salvos localmente.\nDeseja exibi-los no mural também?')) {
+            // spread operator = ...
+            listaCartoes.push(...cartoesLocais);
+        }
+    }
+    catch(e)
+    {
+        listaCartoes = cartoesLocais;
+        if (!listaCartoes.length) {
+            notificar('Não há cartões salvos localmente para serem exibidos!');
+        }
+    }
+
+    mural.innerHTML = '';
+    listaCartoes.forEach(cartao => {
         adicionarCartao(cartao.conteudo, cartao.cor);
     });
+    
 });
 
 export function adicionarCartao(conteudo, cor = '')
