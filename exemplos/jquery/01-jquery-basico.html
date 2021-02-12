@@ -1,0 +1,39 @@
+<meta charset="utf-8">
+<h1>jQuery: $()</h1>
+<style>
+    p {
+        background-color: #f2f2f2;
+        border: 1px solid #ddd;
+        padding: 15px;
+    }
+    p.vermelho {
+        background-color: #fff0f0;
+        border-color: red;
+        color: red;
+    }
+</style>
+
+<p>Parágrafo 1</p>
+<p class="vermelho">Parágrafo 2</p>
+<p>Parágrafo 3</p>
+<p>Parágrafo 4</p>
+<p class="vermelho">Parágrafo 5</p>
+<p class="vermelho">Parágrafo 6</p>
+<p>Parágrafo 7</p>
+<p>Parágrafo 8</p>
+<p>Parágrafo 9</p>
+<p id="p10">Parágrafo 10</p>
+
+<script src="../jquery.js"></script>
+<script>
+
+    $('#p10').html('Texto alterado pelo <strong>jQuery</strong>!!!').css({
+        'font-style' : 'italic',
+        'font-size' : '25px',
+        'color' : '#fff',
+        'background-color' : 'green'
+    });
+
+    $('.vermelho').text('Texto alterado pelo jQuery em todos os vermelhos!');
+
+</script>

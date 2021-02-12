@@ -1,0 +1,77 @@
+<meta charset="utf-8" />
+<h1>Acordeões com jQuery</h1>
+
+<div class="acordeoes">
+
+    <!-- div.acordeao*3>(h4>{Acordeão $})+div.conteudo>div>lorem -->
+    <div class="acordeao">
+        <h4>Acordeão 1</h4>
+        <div class="conteudo">
+            <div>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Corrupti esse eum tempore repellendus
+                temporibus nobis explicabo voluptas recusandae harum beatae enim aliquam molestiae, quod earum atque?
+                Numquam, tempore officiis. Voluptatem?</div>
+        </div>
+    </div>
+    <div class="acordeao">
+        <h4>Acordeão 2</h4>
+        <div class="conteudo">
+            <div>Libero, commodi ullam molestiae repellendus ratione maiores nulla provident perferendis dolore, eveniet
+                itaque nemo illo assumenda nisi tempora consectetur dolores unde consequatur iure aut repudiandae
+                impedit ipsum. Nobis, impedit itaque.</div>
+        </div>
+    </div>
+    <div class="acordeao">
+        <h4>Acordeão 3</h4>
+        <div class="conteudo">
+            <div>Ullam voluptatem ratione a quos porro recusandae assumenda facilis tempora doloremque. Non optio illo
+                expedita autem. Earum rem, ut iure dolor eaque fuga corrupti blanditiis, dolorum numquam delectus fugit
+                esse?</div>
+        </div>
+    </div>
+
+</div>
+
+<style>
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+        padding: 16px;
+    }
+
+    .acordeoes {
+        width: 400px;
+    }
+
+    .acordeao {
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        overflow: hidden;
+        margin-bottom: 30px;
+    }
+
+    h4 {
+        cursor: pointer;
+        background-color: #eee;
+        margin: 0;
+        padding: 10px 20px;
+        border-bottom: 1px solid #ccc;
+    }
+
+    .conteudo {
+        display: none;
+        overflow: hidden;
+    }
+
+    .conteudo div {
+        padding: 20px;
+    }
+</style>
+
+<script src="../jquery.js"></script>
+<script>
+
+    $('.acordeoes').on('click', 'h4', function() {
+        $(this).next().slideToggle(600);
+        $(this).parent().siblings().find('.conteudo').slideUp(600);
+    });
+
+</script>
