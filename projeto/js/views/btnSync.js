@@ -1,5 +1,5 @@
 import { salvarCartoes } from "../server/sync.js";
-import { salvarCartoesStore } from "../storage/db.js";
+import { excluirCartoesStore, salvarCartoesStore } from "../storage/db.js";
 import { getCartoes } from "./mural.js";
 import { notificar } from "./notificacao.js";
 
@@ -14,6 +14,7 @@ btnSync.addEventListener('click', async function() {
     {
         // tenta salvar os cartões no servidor primeiro
         mensagem = await salvarCartoes(listaDeCartoes);
+        await excluirCartoesStore();
     }
     catch(e) 
     {
@@ -27,3 +28,12 @@ btnSync.addEventListener('click', async function() {
     btnSync.classList.replace('botaoSync--esperando', 'botaoSync--sincronizado');
 });
 
+export function sincronizar()
+{
+    if (confirm('Gostaria de carregar os dados do servidor?')) {
+        window.location.reload();
+    }
+    else if (confirm('Gostaria de salvar a versão atual do mural?')) {
+        btnSync.click();
+    }
+}

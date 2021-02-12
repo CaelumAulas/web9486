@@ -23,13 +23,19 @@ export async function salvarCartoes(listaDeCartoes)
         cartoes: listaDeCartoes
     }
 
+    const abortController = new AbortController();
+    setTimeout(() => {
+        abortController.abort();
+    }, 5000);
+
     let url = "http://wd47-ceep.herokuapp.com/salvar-cartoes.php";
     const respostaServidor = await fetch(url, {
         method: 'POST',
         headers: {
             'Content-type' : 'application/json'
         },
-        body: JSON.stringify(infoUsuario)
+        body: JSON.stringify(infoUsuario),
+        signal: abortController.signal
     });
 
     const statusServidor = await respostaServidor.json();

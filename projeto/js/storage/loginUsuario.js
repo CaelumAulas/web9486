@@ -1,3 +1,5 @@
+import { excluirCartoesStore } from "./db.js";
+
 let usuarioLogado = localStorage.getItem('CEEP_USUARIO_LOGADO');
 
 while (!isEmail(usuarioLogado))
@@ -12,10 +14,13 @@ function isEmail(email)
     return validadorEmail.test(email);
 }
 
-export function logout() 
+export async function logout() 
 {
-    localStorage.removeItem('CEEP_USUARIO_LOGADO');
-    window.location.reload();
+    if (confirm('Ao deslogar, suas informações locais não serão mantidas.\nDeseja continuar?')) {
+        await excluirCartoesStore();
+        localStorage.removeItem('CEEP_USUARIO_LOGADO');
+        window.location.reload();
+    }
 }
 
 export default usuarioLogado;
